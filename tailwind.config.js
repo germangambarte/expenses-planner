@@ -8,6 +8,7 @@ export default {
         light: '#f2f0e3',
         dark: '#202020',
         accent: '#f76f53',
+        "accent-soft": '#f76f5344',
       }
     }
   },

@@ -1,6 +1,15 @@
 import BudgetForm from '@/components/BudgetForm'
+import { useBudget } from './hooks/useBudget'
+import { useMemo } from 'react'
+import { BudgetTracker } from '@/components/BudgetTracker'
+import { ExpenseModal } from './components/ExpenseModal'
 
 function App() {
+  const { state } = useBudget()
+
+  const isValidBudget = useMemo(() => {
+    return state.budget && state.budget > 0
+  }, [state.budget])
   return (
     <>
       <header className="py-8 max-h-72">
@@ -8,9 +17,15 @@ function App() {
           Planificador de Gastos
         </h1>
       </header>
-      <div className="max-w-2xl mx-auto rounded-lg p-6 border-2 border-dark dark:border-light">
-        <BudgetForm />
-      </div>
+      {isValidBudget
+        ? (
+          <>
+            <BudgetTracker />
+            <ExpenseModal />
+          </>
+        )
+        : <BudgetForm />
+      }
     </>
   )
 }

@@ -6,9 +6,9 @@ export default function BudgetForm() {
   const { dispatch } = useBudget()
 
   function handleChange(evt: React.ChangeEvent<HTMLInputElement>) {
-    const value = !Number.isNaN(evt.target.valueAsNumber)
-      ? evt.target.valueAsNumber
-      : null
+    const value = Number.isNaN(evt.target.valueAsNumber)
+      ? null
+      : evt.target.valueAsNumber
     setBudget(value)
   }
 
@@ -22,24 +22,24 @@ export default function BudgetForm() {
   }, [budget])
 
   return (
-    <form className="space-y-6" onSubmit={handleSubmit}>
-      <div className="flex flex-col space-y-5">
-        <label htmlFor="budget" className="text-xl font-bold">
-          Definir Presupuesto:
-        </label>
-        <input
-          id="budget"
-          type="number"
-          className="w-full border-2 p-2 pl-4 font-bold outline-none bg-light border-dark rounded-full
-          placeholder:text-dark placeholder:opacity-40
-          dark:bg-dark dark:border-light dark:placeholder:text-light dark:placeholder:opacity-40
-          "
-          placeholder="Define to presupuesto"
-          name="budget"
-          onChange={handleChange}
-          value={budget ?? ''}
-        />
-      </div>
+    <form className="pt-40 flex flex-col justify-center items-center gap-20" onSubmit={handleSubmit}>
+      <label htmlFor="budget" className="text-xl text-center font-bold">
+        Definir Presupuesto
+      </label>
+      <input
+        className=" max-w-xl text-center border-b-2 border-light/40 text-accent text-7xl p-2 font-bold outline-none bg-light 
+        placeholder:text-dark placeholder:opacity-40
+        dark:bg-dark dark:placeholder:text-light dark:placeholder:opacity-40
+        [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none
+        "
+        autoComplete='off'
+        type='number'
+        id="budget"
+        name="budget"
+        placeholder="0"
+        value={budget ?? ''}
+        onChange={handleChange}
+      />
       <input
         type="submit"
         value="Comenzar"
